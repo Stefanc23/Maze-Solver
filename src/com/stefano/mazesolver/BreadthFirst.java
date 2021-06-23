@@ -61,10 +61,6 @@ public class BreadthFirst {
         }
 
         if(path.get(0) == maze[0].length - 2 && path.get(1) == maze.length - 2) {
-
-            for(int i=0; i<traversal.size(); ++i) {
-                System.out.print(traversal.get(i) + " ");
-            }
             return true;
         }
 

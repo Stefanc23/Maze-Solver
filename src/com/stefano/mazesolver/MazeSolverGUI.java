@@ -71,7 +71,7 @@ public class MazeSolverGUI extends JFrame {
                     revalidate();
                     repaint();
                 } catch(Error err) {
-                    err.printStackTrace();
+
                 }
             }
         });
@@ -91,7 +91,7 @@ public class MazeSolverGUI extends JFrame {
                     revalidate();
                     repaint();
                 } catch(Error err) {
-                    err.printStackTrace();
+
                 }
             }
         });

@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="16" left="16" bottom="16" right="16"/>
     <constraints>
-      <xy x="20" y="20" width="390" height="400"/>
+      <xy x="20" y="20" width="498" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -55,10 +55,10 @@
           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Generate and Solve"/>
+          <text value="Generate New Maze and Solve"/>
         </properties>
       </component>
-      <grid id="a924f" binding="mazePanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="a924f" binding="mazePanel" layout-manager="CardLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -66,6 +66,14 @@
         <border type="none"/>
         <children/>
       </grid>
+      <component id="172c1" class="javax.swing.JButton" binding="btnRepeat">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Repeat with Current Maze"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

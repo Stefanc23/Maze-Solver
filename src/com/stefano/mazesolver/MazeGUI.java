@@ -12,31 +12,35 @@ public class MazeGUI extends JPanel {
 
     private int [][] maze;
     private final List<Integer> path;
+    private final List<Integer> traversal;
     private int pathIndex;
+    private int traversalIndex;
 
-
-    public MazeGUI(int[][] maze, List<Integer> path) {
+    public MazeGUI(int[][] maze, List<Integer> path, List<Integer> traversal, int pathIndex, int traversalIndex) {
         this.maze = maze;
         this.path = path;
+        this.traversal = traversal;
+        this.pathIndex = pathIndex;
+        this.traversalIndex = traversalIndex;
 
-        //DepthFirst2.searchPath(maze, 1, 1, path);
-        DepthFirst.searchPath(maze, 1, 1, path);
-        pathIndex = path.size() - 2;
-
-        // game loop each 0.5 seconds
+        // game loop each 0.3 seconds
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 update();
                 repaint();
             }
-        }, 100, 500);
+        }, 100, 200);
     }
 
     public void update() {
-        pathIndex -= 2;
-        if (pathIndex < 0) {
-            pathIndex = 0;
+        if(traversalIndex < traversal.size()) {
+            traversalIndex += 1;
+        } else {
+            pathIndex -= 2;
+            if (pathIndex < 0) {
+                pathIndex = 0;
+            }
         }
     }
 
@@ -60,24 +64,43 @@ public class MazeGUI extends JPanel {
             }
         }
 
-        // draw the path list
-        for(int i=path.size()-1; i>=pathIndex; i-=2) {
-            int pathX = path.get(i - 1);
-            int pathY = path.get(i);
-            if(pathX == 1 && pathY == 1) {
+        // draw the traversal list
+        for(int i=0; i<traversalIndex; i+=2) {
+            int traversalX = traversal.get(i);
+            int traversalY = traversal.get(i + 1);
+            if(traversalIndex == traversal.size() && path.contains(traversalX) && path.contains(traversalY)) {
+                continue;
+            }
+            if(traversalX == 1 && traversalY == 1) {
                 g.setColor(Color.BLUE);
-            } else if(pathX == 11 && pathY == 8) {
+            } else if(traversalX == 11 && traversalY == 8) {
                 g.setColor(Color.RED);
             } else {
-                g.setColor(Color.GREEN);
+                g.setColor(Color.YELLOW);
             }
-            g.fillRect(pathX * 30, pathY * 30, 30, 30);
+            g.fillRect(traversalX * 30, traversalY * 30, 30, 30);
         }
 
-        // draw the ball on path
-        int pathX = path.get(pathIndex);
-        int pathY = path.get(pathIndex + 1);
-        g.setColor(Color.RED);
-        g.fillOval(pathX * 30, pathY * 30, 30, 30);
+        if(traversalIndex == traversal.size()) {
+            // draw the path list
+            for(int i=path.size()-1; i>=pathIndex; i-=2) {
+                int pathX = path.get(i - 1);
+                int pathY = path.get(i);
+                if(pathX == 1 && pathY == 1) {
+                    g.setColor(Color.BLUE);
+                } else if(pathX == 11 && pathY == 8) {
+                    g.setColor(Color.RED);
+                } else {
+                    g.setColor(Color.GREEN);
+                }
+                g.fillRect(pathX * 30, pathY * 30, 30, 30);
+            }
+
+            // draw the ball on path
+            int pathX = path.get(pathIndex);
+            int pathY = path.get(pathIndex + 1);
+            g.setColor(Color.RED);
+            g.fillOval(pathX * 30, pathY * 30, 30, 30);
+        }
     }
 }
